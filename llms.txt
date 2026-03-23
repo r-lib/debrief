@@ -13,7 +13,7 @@ You can install the development version of debrief from
 
 ``` r
 # install.packages("pak")
-pak::pak("emilhvitfeldt/debrief")
+pak::pak("r-lib/debrief")
 ```
 
 ## Quick Start
@@ -56,8 +56,7 @@ steps” suggestions to guide you deeper:
  -> Actions: get specific optimization recommendations
 ```
 
-The
-[`pv_help()`](https://emilhvitfeldt.github.io/debrief/reference/pv_help.md)
+The [`pv_help()`](https://r-lib.github.io/debrief/reference/pv_help.md)
 function lists all available functions by category.
 
 ## Example
@@ -115,7 +114,7 @@ unlink("analysis.R")
 ### Quick Summary
 
 Get a comprehensive overview with
-[`pv_print_debrief()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_debrief.md):
+[`pv_print_debrief()`](https://r-lib.github.io/debrief/reference/pv_print_debrief.md):
 
 ``` r
 pv_print_debrief(p)
@@ -663,19 +662,19 @@ results$self_time
 
 ## Available Functions
 
-| Category          | Functions                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Overview          | [`pv_help()`](https://emilhvitfeldt.github.io/debrief/reference/pv_help.md), [`pv_debrief()`](https://emilhvitfeldt.github.io/debrief/reference/pv_debrief.md), [`pv_print_debrief()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_debrief.md), [`pv_example()`](https://emilhvitfeldt.github.io/debrief/reference/pv_example.md)                                                                                                                            |
-| Time Analysis     | [`pv_self_time()`](https://emilhvitfeldt.github.io/debrief/reference/pv_self_time.md), [`pv_total_time()`](https://emilhvitfeldt.github.io/debrief/reference/pv_total_time.md)                                                                                                                                                                                                                                                                                              |
-| Hot Spots         | [`pv_hot_lines()`](https://emilhvitfeldt.github.io/debrief/reference/pv_hot_lines.md), [`pv_hot_paths()`](https://emilhvitfeldt.github.io/debrief/reference/pv_hot_paths.md), [`pv_worst_line()`](https://emilhvitfeldt.github.io/debrief/reference/pv_worst_line.md), [`pv_print_hot_lines()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_hot_lines.md), [`pv_print_hot_paths()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_hot_paths.md) |
-| Memory            | [`pv_memory()`](https://emilhvitfeldt.github.io/debrief/reference/pv_memory.md), [`pv_memory_lines()`](https://emilhvitfeldt.github.io/debrief/reference/pv_memory_lines.md), [`pv_print_memory()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_memory.md)                                                                                                                                                                                                   |
-| Call Analysis     | [`pv_callers()`](https://emilhvitfeldt.github.io/debrief/reference/pv_callers.md), [`pv_callees()`](https://emilhvitfeldt.github.io/debrief/reference/pv_callees.md), [`pv_call_depth()`](https://emilhvitfeldt.github.io/debrief/reference/pv_call_depth.md), [`pv_call_stats()`](https://emilhvitfeldt.github.io/debrief/reference/pv_call_stats.md)                                                                                                                      |
-| Function Analysis | [`pv_focus()`](https://emilhvitfeldt.github.io/debrief/reference/pv_focus.md), [`pv_recursive()`](https://emilhvitfeldt.github.io/debrief/reference/pv_recursive.md)                                                                                                                                                                                                                                                                                                        |
-| Source Context    | [`pv_source_context()`](https://emilhvitfeldt.github.io/debrief/reference/pv_source_context.md), [`pv_file_summary()`](https://emilhvitfeldt.github.io/debrief/reference/pv_file_summary.md)                                                                                                                                                                                                                                                                                |
-| Visualization     | [`pv_flame()`](https://emilhvitfeldt.github.io/debrief/reference/pv_flame.md), [`pv_flame_condense()`](https://emilhvitfeldt.github.io/debrief/reference/pv_flame_condense.md)                                                                                                                                                                                                                                                                                              |
-| Comparison        | [`pv_compare()`](https://emilhvitfeldt.github.io/debrief/reference/pv_compare.md), [`pv_print_compare()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_compare.md), [`pv_compare_many()`](https://emilhvitfeldt.github.io/debrief/reference/pv_compare_many.md), [`pv_print_compare_many()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_compare_many.md)                                                                                      |
-| Diagnostics       | [`pv_gc_pressure()`](https://emilhvitfeldt.github.io/debrief/reference/pv_gc_pressure.md), [`pv_suggestions()`](https://emilhvitfeldt.github.io/debrief/reference/pv_suggestions.md)                                                                                                                                                                                                                                                                                        |
-| Export            | [`pv_to_json()`](https://emilhvitfeldt.github.io/debrief/reference/pv_to_json.md), [`pv_to_list()`](https://emilhvitfeldt.github.io/debrief/reference/pv_to_list.md)                                                                                                                                                                                                                                                                                                        |
+| Category          | Functions                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Overview          | [`pv_help()`](https://r-lib.github.io/debrief/reference/pv_help.md), [`pv_debrief()`](https://r-lib.github.io/debrief/reference/pv_debrief.md), [`pv_print_debrief()`](https://r-lib.github.io/debrief/reference/pv_print_debrief.md), [`pv_example()`](https://r-lib.github.io/debrief/reference/pv_example.md)                                                                                                                    |
+| Time Analysis     | [`pv_self_time()`](https://r-lib.github.io/debrief/reference/pv_self_time.md), [`pv_total_time()`](https://r-lib.github.io/debrief/reference/pv_total_time.md)                                                                                                                                                                                                                                                                      |
+| Hot Spots         | [`pv_hot_lines()`](https://r-lib.github.io/debrief/reference/pv_hot_lines.md), [`pv_hot_paths()`](https://r-lib.github.io/debrief/reference/pv_hot_paths.md), [`pv_worst_line()`](https://r-lib.github.io/debrief/reference/pv_worst_line.md), [`pv_print_hot_lines()`](https://r-lib.github.io/debrief/reference/pv_print_hot_lines.md), [`pv_print_hot_paths()`](https://r-lib.github.io/debrief/reference/pv_print_hot_paths.md) |
+| Memory            | [`pv_memory()`](https://r-lib.github.io/debrief/reference/pv_memory.md), [`pv_memory_lines()`](https://r-lib.github.io/debrief/reference/pv_memory_lines.md), [`pv_print_memory()`](https://r-lib.github.io/debrief/reference/pv_print_memory.md)                                                                                                                                                                                   |
+| Call Analysis     | [`pv_callers()`](https://r-lib.github.io/debrief/reference/pv_callers.md), [`pv_callees()`](https://r-lib.github.io/debrief/reference/pv_callees.md), [`pv_call_depth()`](https://r-lib.github.io/debrief/reference/pv_call_depth.md), [`pv_call_stats()`](https://r-lib.github.io/debrief/reference/pv_call_stats.md)                                                                                                              |
+| Function Analysis | [`pv_focus()`](https://r-lib.github.io/debrief/reference/pv_focus.md), [`pv_recursive()`](https://r-lib.github.io/debrief/reference/pv_recursive.md)                                                                                                                                                                                                                                                                                |
+| Source Context    | [`pv_source_context()`](https://r-lib.github.io/debrief/reference/pv_source_context.md), [`pv_file_summary()`](https://r-lib.github.io/debrief/reference/pv_file_summary.md)                                                                                                                                                                                                                                                        |
+| Visualization     | [`pv_flame()`](https://r-lib.github.io/debrief/reference/pv_flame.md), [`pv_flame_condense()`](https://r-lib.github.io/debrief/reference/pv_flame_condense.md)                                                                                                                                                                                                                                                                      |
+| Comparison        | [`pv_compare()`](https://r-lib.github.io/debrief/reference/pv_compare.md), [`pv_print_compare()`](https://r-lib.github.io/debrief/reference/pv_print_compare.md), [`pv_compare_many()`](https://r-lib.github.io/debrief/reference/pv_compare_many.md), [`pv_print_compare_many()`](https://r-lib.github.io/debrief/reference/pv_print_compare_many.md)                                                                              |
+| Diagnostics       | [`pv_gc_pressure()`](https://r-lib.github.io/debrief/reference/pv_gc_pressure.md), [`pv_suggestions()`](https://r-lib.github.io/debrief/reference/pv_suggestions.md)                                                                                                                                                                                                                                                                |
+| Export            | [`pv_to_json()`](https://r-lib.github.io/debrief/reference/pv_to_json.md), [`pv_to_list()`](https://r-lib.github.io/debrief/reference/pv_to_list.md)                                                                                                                                                                                                                                                                                |
 
 ### Filtering Support
 
@@ -702,126 +701,126 @@ pv_hot_lines(p, n = 5, min_pct = 2, min_time_ms = 10)
 
 Overview and optimization recommendations
 
-- [`pv_help()`](https://emilhvitfeldt.github.io/debrief/reference/pv_help.md)
-  : List available debrief functions
-- [`pv_debrief()`](https://emilhvitfeldt.github.io/debrief/reference/pv_debrief.md)
+- [`pv_help()`](https://r-lib.github.io/debrief/reference/pv_help.md) :
+  List available debrief functions
+- [`pv_debrief()`](https://r-lib.github.io/debrief/reference/pv_debrief.md)
   : Comprehensive profiling data
-- [`pv_print_debrief()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_debrief.md)
+- [`pv_print_debrief()`](https://r-lib.github.io/debrief/reference/pv_print_debrief.md)
   : Print profiling summary
-- [`pv_suggestions()`](https://emilhvitfeldt.github.io/debrief/reference/pv_suggestions.md)
+- [`pv_suggestions()`](https://r-lib.github.io/debrief/reference/pv_suggestions.md)
   : Generate optimization suggestions
-- [`pv_print_suggestions()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_suggestions.md)
+- [`pv_print_suggestions()`](https://r-lib.github.io/debrief/reference/pv_print_suggestions.md)
   : Print optimization suggestions
 
 ## Time analysis
 
 Function timing breakdowns
 
-- [`pv_self_time()`](https://emilhvitfeldt.github.io/debrief/reference/pv_self_time.md)
+- [`pv_self_time()`](https://r-lib.github.io/debrief/reference/pv_self_time.md)
   : Self-time summary by function
-- [`pv_total_time()`](https://emilhvitfeldt.github.io/debrief/reference/pv_total_time.md)
+- [`pv_total_time()`](https://r-lib.github.io/debrief/reference/pv_total_time.md)
   : Total time summary by function
-- [`pv_call_stats()`](https://emilhvitfeldt.github.io/debrief/reference/pv_call_stats.md)
+- [`pv_call_stats()`](https://r-lib.github.io/debrief/reference/pv_call_stats.md)
   : Call statistics summary
-- [`pv_print_call_stats()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_call_stats.md)
+- [`pv_print_call_stats()`](https://r-lib.github.io/debrief/reference/pv_print_call_stats.md)
   : Print call statistics
 
 ## Memory analysis
 
 Memory allocation and garbage collection
 
-- [`pv_memory()`](https://emilhvitfeldt.github.io/debrief/reference/pv_memory.md)
+- [`pv_memory()`](https://r-lib.github.io/debrief/reference/pv_memory.md)
   : Memory allocation by function
-- [`pv_memory_lines()`](https://emilhvitfeldt.github.io/debrief/reference/pv_memory_lines.md)
+- [`pv_memory_lines()`](https://r-lib.github.io/debrief/reference/pv_memory_lines.md)
   : Memory allocation by source line
-- [`pv_print_memory()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_memory.md)
+- [`pv_print_memory()`](https://r-lib.github.io/debrief/reference/pv_print_memory.md)
   : Print memory allocation summary
-- [`pv_gc_pressure()`](https://emilhvitfeldt.github.io/debrief/reference/pv_gc_pressure.md)
+- [`pv_gc_pressure()`](https://r-lib.github.io/debrief/reference/pv_gc_pressure.md)
   : Detect GC pressure
-- [`pv_print_gc_pressure()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_gc_pressure.md)
+- [`pv_print_gc_pressure()`](https://r-lib.github.io/debrief/reference/pv_print_gc_pressure.md)
   : Print GC pressure analysis
 
 ## Call graph analysis
 
 Function relationships and call patterns
 
-- [`pv_callers()`](https://emilhvitfeldt.github.io/debrief/reference/pv_callers.md)
+- [`pv_callers()`](https://r-lib.github.io/debrief/reference/pv_callers.md)
   : Get callers of a function
-- [`pv_callees()`](https://emilhvitfeldt.github.io/debrief/reference/pv_callees.md)
+- [`pv_callees()`](https://r-lib.github.io/debrief/reference/pv_callees.md)
   : Get callees of a function
-- [`pv_print_callers_callees()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_callers_callees.md)
+- [`pv_print_callers_callees()`](https://r-lib.github.io/debrief/reference/pv_print_callers_callees.md)
   : Print caller/callee analysis for a function
-- [`pv_recursive()`](https://emilhvitfeldt.github.io/debrief/reference/pv_recursive.md)
+- [`pv_recursive()`](https://r-lib.github.io/debrief/reference/pv_recursive.md)
   : Detect recursive functions
-- [`pv_print_recursive()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_recursive.md)
+- [`pv_print_recursive()`](https://r-lib.github.io/debrief/reference/pv_print_recursive.md)
   : Print recursive functions analysis
-- [`pv_call_depth()`](https://emilhvitfeldt.github.io/debrief/reference/pv_call_depth.md)
+- [`pv_call_depth()`](https://r-lib.github.io/debrief/reference/pv_call_depth.md)
   : Call depth breakdown
-- [`pv_print_call_depth()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_call_depth.md)
+- [`pv_print_call_depth()`](https://r-lib.github.io/debrief/reference/pv_print_call_depth.md)
   : Print call depth breakdown
 
 ## Hot spots
 
 Find where time is spent
 
-- [`pv_hot_lines()`](https://emilhvitfeldt.github.io/debrief/reference/pv_hot_lines.md)
+- [`pv_hot_lines()`](https://r-lib.github.io/debrief/reference/pv_hot_lines.md)
   : Hot source lines by self-time
-- [`pv_print_hot_lines()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_hot_lines.md)
+- [`pv_print_hot_lines()`](https://r-lib.github.io/debrief/reference/pv_print_hot_lines.md)
   : Print hot lines with source context
-- [`pv_worst_line()`](https://emilhvitfeldt.github.io/debrief/reference/pv_worst_line.md)
+- [`pv_worst_line()`](https://r-lib.github.io/debrief/reference/pv_worst_line.md)
   : Get the single hottest line
-- [`pv_hot_paths()`](https://emilhvitfeldt.github.io/debrief/reference/pv_hot_paths.md)
+- [`pv_hot_paths()`](https://r-lib.github.io/debrief/reference/pv_hot_paths.md)
   : Hot call paths
-- [`pv_print_hot_paths()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_hot_paths.md)
+- [`pv_print_hot_paths()`](https://r-lib.github.io/debrief/reference/pv_print_hot_paths.md)
   : Print hot paths in readable format
 
 ## Visualization
 
 Text-based flame graphs
 
-- [`pv_flame()`](https://emilhvitfeldt.github.io/debrief/reference/pv_flame.md)
+- [`pv_flame()`](https://r-lib.github.io/debrief/reference/pv_flame.md)
   : Text-based flame graph
-- [`pv_flame_condense()`](https://emilhvitfeldt.github.io/debrief/reference/pv_flame_condense.md)
+- [`pv_flame_condense()`](https://r-lib.github.io/debrief/reference/pv_flame_condense.md)
   : Condensed flame graph
 
 ## Source context
 
 Source code and file analysis
 
-- [`pv_source_context()`](https://emilhvitfeldt.github.io/debrief/reference/pv_source_context.md)
+- [`pv_source_context()`](https://r-lib.github.io/debrief/reference/pv_source_context.md)
   : Show source context for a specific location
-- [`pv_file_summary()`](https://emilhvitfeldt.github.io/debrief/reference/pv_file_summary.md)
+- [`pv_file_summary()`](https://r-lib.github.io/debrief/reference/pv_file_summary.md)
   : File-level time summary
-- [`pv_print_file_summary()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_file_summary.md)
+- [`pv_print_file_summary()`](https://r-lib.github.io/debrief/reference/pv_print_file_summary.md)
   : Print file summary
-- [`pv_focus()`](https://emilhvitfeldt.github.io/debrief/reference/pv_focus.md)
+- [`pv_focus()`](https://r-lib.github.io/debrief/reference/pv_focus.md)
   : Focused analysis of a specific function
 
 ## Comparison
 
 Compare profiling runs
 
-- [`pv_compare()`](https://emilhvitfeldt.github.io/debrief/reference/pv_compare.md)
+- [`pv_compare()`](https://r-lib.github.io/debrief/reference/pv_compare.md)
   : Compare two profvis profiles
-- [`pv_print_compare()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_compare.md)
+- [`pv_print_compare()`](https://r-lib.github.io/debrief/reference/pv_print_compare.md)
   : Print profile comparison
-- [`pv_compare_many()`](https://emilhvitfeldt.github.io/debrief/reference/pv_compare_many.md)
+- [`pv_compare_many()`](https://r-lib.github.io/debrief/reference/pv_compare_many.md)
   : Compare multiple profvis profiles
-- [`pv_print_compare_many()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_compare_many.md)
+- [`pv_print_compare_many()`](https://r-lib.github.io/debrief/reference/pv_print_compare_many.md)
   : Print comparison of multiple profiles
 
 ## Export
 
 Export results for external tools
 
-- [`pv_to_json()`](https://emilhvitfeldt.github.io/debrief/reference/pv_to_json.md)
+- [`pv_to_json()`](https://r-lib.github.io/debrief/reference/pv_to_json.md)
   : Export profiling results as JSON
-- [`pv_to_list()`](https://emilhvitfeldt.github.io/debrief/reference/pv_to_list.md)
+- [`pv_to_list()`](https://r-lib.github.io/debrief/reference/pv_to_list.md)
   : Export profiling results as a list
 
 ## Example data
 
-- [`pv_example()`](https://emilhvitfeldt.github.io/debrief/reference/pv_example.md)
+- [`pv_example()`](https://r-lib.github.io/debrief/reference/pv_example.md)
   : Example profvis data
 
 # Articles
@@ -829,4 +828,4 @@ Export results for external tools
 ### Case studies
 
 - [Case study: Using debrief for iterative R performance
-  optimization](https://emilhvitfeldt.github.io/debrief/articles/case-study-tidypredict.md):
+  optimization](https://r-lib.github.io/debrief/articles/case-study-tidypredict.md):

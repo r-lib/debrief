@@ -23,7 +23,7 @@ pv_to_list(
 - include:
 
   Character vector specifying which analyses to include. Same options as
-  [`pv_to_json()`](https://emilhvitfeldt.github.io/debrief/reference/pv_to_json.md).
+  [`pv_to_json()`](https://r-lib.github.io/debrief/reference/pv_to_json.md).
 
 - system_info:
 

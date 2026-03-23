@@ -78,7 +78,7 @@ pv_print_debrief(p)
 ```
 
 This prompt established the workflow: profile with profvis, analyze with
-[`pv_print_debrief()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_debrief.md),
+[`pv_print_debrief()`](https://r-lib.github.io/debrief/reference/pv_print_debrief.md),
 optimize, and repeat.
 
 ## Iteration 1: Initial profiling
@@ -291,7 +291,7 @@ which is inherent to the task.
 ## Why I only used `pv_print_debrief()`
 
 The debrief package offers several functions, and
-[`pv_print_debrief()`](https://emilhvitfeldt.github.io/debrief/reference/pv_print_debrief.md)
+[`pv_print_debrief()`](https://r-lib.github.io/debrief/reference/pv_print_debrief.md)
 suggests others at the end of its output:
 
     ### Next steps
@@ -302,11 +302,11 @@ suggests others at the end of its output:
 
 ### Functions I didn’t use
 
-| Function                                                                                        | Purpose                                     | Why I skipped it                                                                                                         |
-|:------------------------------------------------------------------------------------------------|:--------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------|
-| [`pv_source_context()`](https://emilhvitfeldt.github.io/debrief/reference/pv_source_context.md) | Shows more code context around hot lines    | I was already reading full source files directly. Once HOT LINES said “line 6 in model-ranger.R”, I just read that file. |
-| [`pv_suggestions()`](https://emilhvitfeldt.github.io/debrief/reference/pv_suggestions.md)       | Provides automated optimization suggestions | The bottlenecks were obvious enough (32% in `[.data.frame`, 15.6 GB on one line) that I could diagnose the issue myself. |
-| [`pv_focus()`](https://emilhvitfeldt.github.io/debrief/reference/pv_focus.md)                   | Filters analysis to a specific function     | The initial output was already clear about where problems were. No need to drill down.                                   |
+| Function                                                                                | Purpose                                     | Why I skipped it                                                                                                         |
+|:----------------------------------------------------------------------------------------|:--------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------|
+| [`pv_source_context()`](https://r-lib.github.io/debrief/reference/pv_source_context.md) | Shows more code context around hot lines    | I was already reading full source files directly. Once HOT LINES said “line 6 in model-ranger.R”, I just read that file. |
+| [`pv_suggestions()`](https://r-lib.github.io/debrief/reference/pv_suggestions.md)       | Provides automated optimization suggestions | The bottlenecks were obvious enough (32% in `[.data.frame`, 15.6 GB on one line) that I could diagnose the issue myself. |
+| [`pv_focus()`](https://r-lib.github.io/debrief/reference/pv_focus.md)                   | Filters analysis to a specific function     | The initial output was already clear about where problems were. No need to drill down.                                   |
 
 ### When `pv_print_debrief()` alone is sufficient
 
@@ -328,10 +328,10 @@ I would reach for additional functions if:
 - **Complex call paths** - Need to understand how a bottleneck is
   reached from different entry points
 - **Unfamiliar codebase** -
-  [`pv_source_context()`](https://emilhvitfeldt.github.io/debrief/reference/pv_source_context.md)
+  [`pv_source_context()`](https://r-lib.github.io/debrief/reference/pv_source_context.md)
   would help see surrounding code without switching tools
 - **Stuck on diagnosis** -
-  [`pv_suggestions()`](https://emilhvitfeldt.github.io/debrief/reference/pv_suggestions.md)
+  [`pv_suggestions()`](https://r-lib.github.io/debrief/reference/pv_suggestions.md)
   might catch patterns I missed
 
 ## Final results

@@ -35,7 +35,7 @@ pv_print_debrief(x, n_functions = 10, n_lines = 10, n_paths = 5, n_memory = 5)
 ## Value
 
 Invisibly returns the result of
-[`pv_debrief()`](https://emilhvitfeldt.github.io/debrief/reference/pv_debrief.md).
+[`pv_debrief()`](https://r-lib.github.io/debrief/reference/pv_debrief.md).
 
 ## Examples
 

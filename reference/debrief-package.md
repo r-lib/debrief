@@ -9,11 +9,11 @@ caller/callee relationships, and memory allocation breakdowns.
 
 Useful links:
 
-- <https://github.com/emilhvitfeldt/debrief>
+- <https://github.com/r-lib/debrief>
 
-- <https://emilhvitfeldt.github.io/debrief/>
+- <https://r-lib.github.io/debrief/>
 
-- Report bugs at <https://github.com/emilhvitfeldt/debrief/issues>
+- Report bugs at <https://github.com/r-lib/debrief/issues>
 
 ## Author
 
