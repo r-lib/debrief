@@ -13,13 +13,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-# debrief <a href="https://emilhvitfeldt.github.io/debrief/"><img src="man/figures/logo.png" align="right" height="139" alt="debrief website" /></a>
+# debrief <a href="https://r-lib.github.io/debrief/"><img src="man/figures/logo.png" align="right" height="139" alt="debrief website" /></a>
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/debrief)](https://CRAN.R-project.org/package=debrief)
-[![R-CMD-check](https://github.com/EmilHvitfeldt/debrief/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/EmilHvitfeldt/debrief/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/EmilHvitfeldt/debrief/graph/badge.svg)](https://app.codecov.io/gh/EmilHvitfeldt/debrief)
+[![R-CMD-check](https://github.com/r-lib/debrief/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/debrief/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/debrief/graph/badge.svg)](https://app.codecov.io/gh/r-lib/debrief)
 <!-- badges: end -->
 
 debrief provides text-based summaries and analysis tools for [profvis](https://rstudio.github.io/profvis/) profiling output. It's designed for terminal workflows and AI agent consumption, offering views including hotspot analysis, call trees, source context, caller/callee relationships, and memory allocation breakdowns.
@@ -30,7 +30,7 @@ You can install the development version of debrief from [GitHub](https://github.
 
 ``` r
 # install.packages("pak")
-pak::pak("emilhvitfeldt/debrief")
+pak::pak("r-lib/debrief")
 ```
 
 ## Quick Start

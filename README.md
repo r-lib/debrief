@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# debrief <a href="https://emilhvitfeldt.github.io/debrief/"><img src="man/figures/logo.png" align="right" height="139" alt="debrief website" /></a>
+# debrief <a href="https://r-lib.github.io/debrief/"><img src="man/figures/logo.png" align="right" height="139" alt="debrief website" /></a>
 
 <!-- badges: start -->
 
@@ -9,9 +9,9 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/debrief)](https://CRAN.R-project.org/package=debrief)
-[![R-CMD-check](https://github.com/EmilHvitfeldt/debrief/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/EmilHvitfeldt/debrief/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/r-lib/debrief/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/debrief/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/EmilHvitfeldt/debrief/graph/badge.svg)](https://app.codecov.io/gh/EmilHvitfeldt/debrief)
+coverage](https://codecov.io/gh/r-lib/debrief/graph/badge.svg)](https://app.codecov.io/gh/r-lib/debrief)
 <!-- badges: end -->
 
 debrief provides text-based summaries and analysis tools for
@@ -27,7 +27,7 @@ You can install the development version of debrief from
 
 ``` r
 # install.packages("pak")
-pak::pak("emilhvitfeldt/debrief")
+pak::pak("r-lib/debrief")
 ```
 
 ## Quick Start

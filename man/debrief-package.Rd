@@ -13,9 +13,9 @@ Provides text-based summaries and analysis tools for 'profvis' profiling output.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/emilhvitfeldt/debrief}
-  \item \url{https://emilhvitfeldt.github.io/debrief/}
-  \item Report bugs at \url{https://github.com/emilhvitfeldt/debrief/issues}
+  \item \url{https://github.com/r-lib/debrief}
+  \item \url{https://r-lib.github.io/debrief/}
+  \item Report bugs at \url{https://github.com/r-lib/debrief/issues}
 }
 
 }
