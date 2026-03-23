@@ -9,8 +9,8 @@ Description: Provides text-based summaries and analysis tools for
     trees, source context, caller/callee relationships, and memory
     allocation breakdowns.
 License: MIT + file LICENSE
-URL: https://github.com/emilhvitfeldt/debrief, https://emilhvitfeldt.github.io/debrief/
-BugReports: https://github.com/emilhvitfeldt/debrief/issues
+URL: https://github.com/r-lib/debrief, https://r-lib.github.io/debrief/
+BugReports: https://github.com/r-lib/debrief/issues
 Suggests:
     knitr,
     profvis,
