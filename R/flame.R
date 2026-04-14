@@ -136,6 +136,10 @@ print_flame_tree <- function(tree, width, min_pct, total_samples, max_depth) {
 #' @param width Width of bars.
 #'
 #' @return Invisibly returns a data frame with path, samples, and pct columns.
+#'
+#' @examples
+#' p <- pv_example()
+#' pv_flame_condense(p)
 #' @export
 pv_flame_condense <- function(x, n = 10, width = 50) {
   pd <- extract_profile_data(x)

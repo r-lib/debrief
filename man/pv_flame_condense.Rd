@@ -20,3 +20,7 @@ Invisibly returns a data frame with path, samples, and pct columns.
 Shows a simplified, condensed view of the flame graph focusing on the
 hottest paths.
 }
+\examples{
+p <- pv_example()
+pv_flame_condense(p)
+}
