@@ -4,6 +4,9 @@
 
 - **Emil Hvitfeldt**. Author, maintainer.
 
+- **Posit Software, PBC**. Copyright holder, funder.
+  [![ROR](https://raw.githubusercontent.com/ror-community/ror-logos/main/ror-icon-rgb.svg)](https://ror.org/03wc8by49)
+
 ## Citation
 
 Source:

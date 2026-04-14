@@ -18,3 +18,8 @@ Useful links:
 ## Author
 
 **Maintainer**: Emil Hvitfeldt <emil.hvitfeldt@posit.co>
+
+Other contributors:
+
+- Posit Software, PBC ([ROR](https://ror.org/03wc8by49)) \[copyright
+  holder, funder\]
