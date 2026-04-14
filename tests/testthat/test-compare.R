@@ -114,3 +114,98 @@ test_that("pv_compare handles identical profiles", {
   # Same profile should show no change
   expect_equal(result$summary$before[1], result$summary$after[1])
 })
+
+make_simple_prof <- function(labels, interval = 10) {
+  n <- length(labels)
+  data.frame(
+    time = seq_len(n),
+    depth = rep(1L, n),
+    label = labels,
+    filename = rep(NA_character_, n),
+    linenum = rep(NA_real_, n),
+    filenum = rep(NA_real_, n),
+    memalloc = seq(100, by = 100, length.out = n),
+    meminc = rep(0, n),
+    stringsAsFactors = FALSE
+  )
+}
+
+test_that("pv_compare pct_change is Inf when function only in after", {
+  prof_before <- make_simple_prof(rep("common", 5))
+  prof_after <- make_simple_prof(c(
+    rep("common", 3),
+    "new_func",
+    "new_func",
+    "new_func"
+  ))
+
+  p1 <- mock_profvis(prof = prof_before, files = list())
+  p2 <- mock_profvis(prof = prof_after, files = list())
+
+  result <- pv_compare(p1, p2)
+  new_row <- result$by_function[result$by_function$label == "new_func", ]
+
+  expect_equal(new_row$pct_change, Inf)
+})
+
+test_that("pv_print_compare shows improvements and regressions", {
+  prof_before <- make_simple_prof(c(rep("slow_func", 5), rep("common", 5)))
+  prof_after <- make_simple_prof(c(rep("new_func", 5), rep("common", 5)))
+
+  p1 <- mock_profvis(prof = prof_before, files = list())
+  p2 <- mock_profvis(prof = prof_after, files = list())
+
+  expect_snapshot(pv_print_compare(p1, p2))
+})
+
+test_that("pv_compare_many returns correct structure", {
+  p1 <- mock_profvis()
+  p2 <- mock_profvis()
+
+  result <- pv_compare_many(a = p1, b = p2)
+
+  expect_s3_class(result, "data.frame")
+  expect_named(result, c("name", "time_ms", "samples", "vs_fastest", "rank"))
+})
+
+test_that("pv_compare_many marks fastest correctly", {
+  p1 <- mock_profvis()
+  p2 <- mock_profvis()
+
+  result <- pv_compare_many(a = p1, b = p2)
+
+  expect_equal(result$rank[1], 1)
+  expect_equal(result$vs_fastest[1], "fastest")
+})
+
+test_that("pv_compare_many accepts named list", {
+  p1 <- mock_profvis()
+  p2 <- mock_profvis()
+
+  result <- pv_compare_many(list(a = p1, b = p2))
+
+  expect_s3_class(result, "data.frame")
+  expect_equal(nrow(result), 2)
+})
+
+test_that("pv_compare_many requires at least 2 profiles", {
+  p <- mock_profvis()
+  expect_snapshot(error = TRUE, pv_compare_many(a = p))
+})
+
+test_that("pv_compare_many requires named profiles", {
+  p1 <- mock_profvis()
+  p2 <- mock_profvis()
+  expect_snapshot(error = TRUE, pv_compare_many(p1, p2))
+})
+
+test_that("pv_compare_many rejects non-profvis input", {
+  p <- mock_profvis()
+  expect_snapshot(error = TRUE, pv_compare_many(a = p, b = list()))
+})
+
+test_that("pv_print_compare_many snapshot", {
+  p1 <- mock_profvis()
+  p2 <- mock_profvis()
+  expect_snapshot(pv_print_compare_many(a = p1, b = p2))
+})

@@ -93,3 +93,38 @@ test_that("hot spot functions reject non-profvis input", {
   expect_error(pv_hot_lines(list()), "must be a profvis object")
   expect_error(pv_hot_paths("not profvis"), "must be a profvis object")
 })
+
+test_that("pv_print_hot_lines shows source not available when files empty", {
+  prof <- data.frame(
+    time = c(1L, 2L, 3L),
+    depth = rep(1L, 3),
+    label = rep("func", 3),
+    filename = rep("R/main.R", 3),
+    linenum = rep(5.0, 3),
+    filenum = rep(1.0, 3),
+    memalloc = c(100, 200, 300),
+    meminc = rep(0, 3),
+    stringsAsFactors = FALSE
+  )
+  p <- mock_profvis(prof = prof, files = list())
+  expect_snapshot(pv_print_hot_lines(p))
+})
+
+test_that("pv_worst_line returns NA code when source unavailable", {
+  prof <- data.frame(
+    time = c(1L, 2L),
+    depth = rep(1L, 2),
+    label = rep("func", 2),
+    filename = rep("R/main.R", 2),
+    linenum = rep(5.0, 2),
+    filenum = rep(1.0, 2),
+    memalloc = c(100, 200),
+    meminc = rep(0, 2),
+    stringsAsFactors = FALSE
+  )
+  p <- mock_profvis(prof = prof, files = list())
+  result <- pv_worst_line(p)
+
+  expect_equal(result$code, NA_character_)
+  expect_equal(length(result$context), 0)
+})

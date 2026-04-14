@@ -42,3 +42,44 @@
       Use devtools::load_all() to enable source references.
       Run pv_help() to see all available functions.
 
+# pv_print_memory shows no allocations message for by function
+
+    Code
+      pv_print_memory(p, by = "function")
+    Output
+      No significant memory allocations detected.
+      Run pv_help() to see all available functions.
+
+# pv_print_debrief handles profile with no memory allocations
+
+    Code
+      pv_print_debrief(p)
+    Output
+      ## PROFILING SUMMARY
+      
+      
+      Total time: 20 ms (2 samples @ 10 ms interval)
+      Source references: not available (use devtools::load_all())
+      
+      
+      ### TOP FUNCTIONS BY SELF-TIME
+          20 ms (100.0%)  inner
+      
+      ### TOP FUNCTIONS BY TOTAL TIME
+          20 ms (100.0%)  inner
+          20 ms (100.0%)  outer
+      
+      ### HOT CALL PATHS
+      
+      20 ms (100.0%) - 2 samples:
+          outer
+        -> inner
+      
+      ### MEMORY ALLOCATION (by function)
+      No significant memory allocations detected.
+      
+      ### Next steps
+      pv_focus(p, "inner")
+      pv_suggestions(p)
+      pv_help()
+

@@ -90,3 +90,35 @@ test_that("pv_memory handles profile with no allocations", {
   expect_s3_class(result, "data.frame")
   expect_equal(nrow(result), 0)
 })
+
+test_that("pv_print_memory shows no allocations message for by function", {
+  prof <- data.frame(
+    time = c(1L, 2L),
+    depth = c(1L, 1L),
+    label = c("func", "func"),
+    filename = rep(NA_character_, 2),
+    linenum = rep(NA_real_, 2),
+    filenum = rep(NA_real_, 2),
+    memalloc = c(100, 100),
+    meminc = c(0, 0),
+    stringsAsFactors = FALSE
+  )
+  p <- mock_profvis(prof = prof, files = list())
+  expect_snapshot(pv_print_memory(p, by = "function"))
+})
+
+test_that("pv_print_debrief handles profile with no memory allocations", {
+  prof <- data.frame(
+    time = c(1L, 1L, 2L, 2L),
+    depth = c(1L, 2L, 1L, 2L),
+    label = c("outer", "inner", "outer", "inner"),
+    filename = rep(NA_character_, 4),
+    linenum = rep(NA_real_, 4),
+    filenum = rep(NA_real_, 4),
+    memalloc = c(100, 100, 100, 100),
+    meminc = c(0, 0, 0, 0),
+    stringsAsFactors = FALSE
+  )
+  p <- mock_profvis(prof = prof, files = list())
+  expect_snapshot(pv_print_debrief(p))
+})

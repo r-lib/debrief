@@ -55,3 +55,24 @@
       pv_focus(p, "outer")
       pv_callers(p, "outer")
 
+# pv_print_callers_callees shows none when callees empty
+
+    Code
+      pv_print_callers_callees(p, "bar")
+    Output
+      ## FUNCTION ANALYSIS: bar
+      
+      
+      Total time: 10 ms (33.3% of profile)
+      Appearances: 1 samples
+      
+      ### Called by
+            1 samples (100.0%)  foo
+      
+      ### Calls to
+        Callees: none
+      
+      ### Next steps
+      pv_focus(p, "bar")
+      pv_focus(p, "foo")
+
