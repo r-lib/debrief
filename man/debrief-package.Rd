@@ -22,5 +22,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Emil Hvitfeldt \email{emil.hvitfeldt@posit.co}
 
+Other contributors:
+\itemize{
+  \item Posit Software, PBC (\href{https://ror.org/03wc8by49}{ROR}) [copyright holder, funder]
+}
+
 }
 \keyword{internal}
