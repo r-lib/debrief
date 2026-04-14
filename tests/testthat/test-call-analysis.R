@@ -109,3 +109,26 @@ test_that("call analysis functions reject non-profvis input", {
   expect_error(pv_callees(42, "func"), "must be a profvis object")
   expect_error(pv_call_stats(NULL), "must be a profvis object")
 })
+
+test_that("pv_call_stats handles recursive functions", {
+  p <- mock_profvis_recursive()
+  result <- pv_call_stats(p)
+
+  expect_s3_class(result, "data.frame")
+  expect_in("recurse", result$label)
+  recurse_row <- result[result$label == "recurse", ]
+  expect_gt(recurse_row$calls, 1)
+})
+
+test_that("pv_callees returns empty for leaf function", {
+  p <- mock_profvis_no_source()
+  result <- pv_callees(p, "bar")
+
+  expect_s3_class(result, "data.frame")
+  expect_equal(nrow(result), 0)
+})
+
+test_that("pv_print_callers_callees shows none when callees empty", {
+  p <- mock_profvis_no_source()
+  expect_snapshot(pv_print_callers_callees(p, "bar"))
+})

@@ -81,3 +81,47 @@ test_that("source context functions reject non-profvis input", {
   expect_error(pv_file_summary("bad"), "must be a profvis object")
   expect_error(pv_print_file_summary(42), "must be a profvis object")
 })
+
+test_that("pv_source_context warns when multiple files match", {
+  p <- mock_profvis()
+  expect_snapshot(pv_source_context(p, "R/"))
+})
+
+test_that("pv_source_context uses min linenum when no top_of_stack for file", {
+  prof <- data.frame(
+    time = c(1L, 1L),
+    depth = c(1L, 2L),
+    label = c("outer", "deep"),
+    filename = c("R/main.R", NA_character_),
+    linenum = c(10.0, NA_real_),
+    filenum = c(1.0, NA_real_),
+    memalloc = c(100, 200),
+    meminc = c(0, 100),
+    stringsAsFactors = FALSE
+  )
+  files <- list(
+    list(
+      filename = "R/main.R",
+      content = paste(paste0("line", 1:15), collapse = "\n"),
+      normpath = "R/main.R"
+    )
+  )
+  p <- mock_profvis(prof = prof, files = files)
+  expect_snapshot(pv_source_context(p, "R/main.R", linenum = NULL))
+})
+
+test_that("pv_source_context shows source not available when files empty", {
+  prof <- data.frame(
+    time = c(1L, 2L),
+    depth = rep(1L, 2),
+    label = rep("func", 2),
+    filename = rep("R/main.R", 2),
+    linenum = rep(5.0, 2),
+    filenum = rep(1.0, 2),
+    memalloc = c(100, 200),
+    meminc = rep(0, 2),
+    stringsAsFactors = FALSE
+  )
+  p <- mock_profvis(prof = prof, files = list())
+  expect_snapshot(pv_source_context(p, "R/main.R", linenum = 5))
+})

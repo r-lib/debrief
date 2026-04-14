@@ -73,3 +73,21 @@
       pv_focus(p, "deep")
       pv_flame(p)
 
+# pv_print_hot_lines shows source not available when files empty
+
+    Code
+      pv_print_hot_lines(p)
+    Output
+      ## HOT SOURCE LINES
+      
+      
+      Rank 1: R/main.R:5 (30 ms, 100.0%)
+      Function: func
+      
+        (source not available)
+      
+      
+      ### Next steps
+      pv_focus(p, "func")
+      pv_source_context(p, "R/main.R")
+

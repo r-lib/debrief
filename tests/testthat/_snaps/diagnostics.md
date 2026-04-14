@@ -86,3 +86,14 @@
       pv_focus(p, "x")
       pv_gc_pressure(p)
 
+# pv_print_suggestions handles profile with truly no suggestions
+
+    Code
+      pv_print_suggestions(p)
+    Output
+      ## OPTIMIZATION SUGGESTIONS
+      
+      
+      No suggestions.
+      Run pv_help() to see all available functions.
+

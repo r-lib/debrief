@@ -132,3 +132,113 @@ test_that("JSON serializer handles empty lists", {
   result <- debrief:::to_json(list(arr = list()))
   expect_true(grepl("\\[\\]", result))
 })
+
+test_that("pv_to_json includes system info when requested", {
+  p <- pv_example()
+  json <- pv_to_json(p, system_info = TRUE)
+
+  expect_match(json, "r_version")
+  expect_match(json, "platform")
+})
+
+test_that("pv_to_list includes system info when requested", {
+  p <- pv_example()
+  result <- pv_to_list(p, system_info = TRUE)
+
+  expect_in("system", names(result$metadata))
+  expect_in("r_version", names(result$metadata$system))
+})
+
+test_that("pv_to_json handles profile with no gc pressure", {
+  p <- mock_profvis()
+  json <- pv_to_json(p, include = "gc_pressure")
+
+  expect_type(json, "character")
+  expect_match(json, "gc_pressure")
+})
+
+test_that("pv_to_json handles profile with gc pressure", {
+  p <- mock_profvis_gc()
+  json <- pv_to_json(p, include = "gc_pressure")
+
+  expect_type(json, "character")
+  expect_match(json, "severity")
+})
+
+test_that("pv_to_json handles profile with no suggestions", {
+  prof <- data.frame(
+    time = 1L,
+    depth = 1L,
+    label = "(top-level)",
+    filename = NA_character_,
+    linenum = NA_real_,
+    filenum = NA_real_,
+    memalloc = 100,
+    meminc = 0,
+    stringsAsFactors = FALSE
+  )
+  p <- mock_profvis(prof = prof, files = list())
+  json <- pv_to_json(p, include = "suggestions")
+
+  expect_type(json, "character")
+  expect_match(json, "suggestions")
+})
+
+test_that("pv_to_json handles profile with no recursive functions", {
+  p <- mock_profvis()
+  json <- pv_to_json(p, include = "recursive")
+
+  expect_type(json, "character")
+  expect_match(json, "recursive")
+})
+
+test_that("pv_to_json handles profile with recursive functions", {
+  p <- mock_profvis_recursive()
+  json <- pv_to_json(p, include = "recursive")
+
+  expect_type(json, "character")
+  expect_match(json, "recurse")
+})
+
+test_that("JSON serializer handles NULL input", {
+  result <- debrief:::to_json(NULL)
+  expect_equal(result, "null")
+})
+
+test_that("JSON serializer handles atomic vector of length > 1", {
+  result <- debrief:::to_json(c(1, 2, 3))
+  expect_match(result, "\\[")
+  expect_match(result, "1")
+  expect_match(result, "3")
+})
+
+test_that("JSON serializer handles data frame input", {
+  result <- debrief:::to_json(data.frame(x = 1, y = "a"))
+  expect_match(result, "\\[")
+  expect_match(result, '"x"')
+})
+
+test_that("pv_to_json covers gc_pressure empty path with default include", {
+  prof <- data.frame(
+    time = 1:3,
+    depth = rep(1L, 3),
+    label = rep("work", 3),
+    filename = rep(NA_character_, 3),
+    linenum = rep(NA_real_, 3),
+    filenum = rep(NA_real_, 3),
+    memalloc = c(100, 200, 300),
+    meminc = rep(0, 3),
+    stringsAsFactors = FALSE
+  )
+  p <- mock_profvis(prof = prof, files = list())
+  json <- pv_to_json(p)
+
+  expect_type(json, "character")
+  expect_match(json, "gc_pressure")
+  expect_match(json, "recursive")
+})
+
+test_that("JSON serializer returns null for non-serializable objects", {
+  result <- debrief:::to_json(new.env())
+  expect_equal(result, "null")
+})
