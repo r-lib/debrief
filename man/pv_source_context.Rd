@@ -17,7 +17,8 @@ line in the file.}
 \item{context}{Number of lines to show before and after.}
 }
 \value{
-Invisibly returns a data frame with line-by-line profiling data.
+Invisibly returns a \code{debrief_source_context} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Displays source code around a specific file and line number with profiling

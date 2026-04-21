@@ -9,7 +9,8 @@
 #'   line in the file.
 #' @param context Number of lines to show before and after.
 #'
-#' @return Invisibly returns a data frame with line-by-line profiling data.
+#' @return Invisibly returns a `debrief_source_context` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example()
@@ -30,26 +31,28 @@ pv_source_context <- function(x, filename, linenum = NULL, context = 10) {
   matching <- grep(filename, available_files, value = TRUE, fixed = TRUE)
 
   if (length(matching) == 0) {
-    cat("File not found in profiling data.\n")
-    cat("Available files:\n")
-    for (f in available_files) {
-      cat("  ", f, "\n")
-    }
-    cat("\n")
-    cat_help_hint()
-    return(invisible(NULL))
+    obj <- structure(
+      list(
+        not_found = TRUE,
+        available_files = available_files,
+        line_data = NULL,
+        source_lines = NULL
+      ),
+      class = "debrief_source_context"
+    )
+    print(obj)
+    return(invisible(obj))
   }
 
-  if (length(matching) > 1) {
-    cat("Multiple files match. Using:", matching[1], "\n")
-  }
+  multiple_match <- length(matching) > 1
   filename <- matching[1]
 
   # Get profiling data for this file
   file_prof <- prof[!is.na(prof$filename) & prof$filename == filename, ]
 
   # If no linenum specified, find the hottest line
-  if (is.null(linenum)) {
+  auto_linenum <- is.null(linenum)
+  if (auto_linenum) {
     # Self-time: top of stack (filter to this file)
     top_of_stack <- extract_top_of_stack(prof)
     top_of_stack <- top_of_stack[
@@ -62,7 +65,6 @@ pv_source_context <- function(x, filename, linenum = NULL, context = 10) {
     } else {
       linenum <- min(file_prof$linenum, na.rm = TRUE)
     }
-    cat(sprintf("Showing context around hottest line: %d\n\n", linenum))
   }
 
   # Get line-by-line profiling data
@@ -79,11 +81,73 @@ pv_source_context <- function(x, filename, linenum = NULL, context = 10) {
   )
 
   if (is.null(source_lines)) {
-    cat("Source code not available for this file.\n")
-    return(invisible(line_data))
+    obj <- structure(
+      list(
+        not_found = FALSE,
+        no_source = TRUE,
+        line_data = line_data
+      ),
+      class = "debrief_source_context"
+    )
+    print(obj)
+    return(invisible(obj))
   }
 
   actual_end <- min(start_line + length(source_lines) - 1, end_line)
+
+  obj <- structure(
+    list(
+      not_found = FALSE,
+      no_source = FALSE,
+      multiple_match = multiple_match,
+      auto_linenum = auto_linenum,
+      filename = filename,
+      linenum = linenum,
+      start_line = start_line,
+      actual_end = actual_end,
+      source_lines = source_lines,
+      line_data = line_data,
+      file_prof = file_prof
+    ),
+    class = "debrief_source_context"
+  )
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_source_context <- function(x, ...) {
+  if (x$not_found) {
+    cat("File not found in profiling data.\n")
+    cat("Available files:\n")
+    for (f in x$available_files) {
+      cat("  ", f, "\n")
+    }
+    cat("\n")
+    cat_help_hint()
+    return(invisible(x))
+  }
+
+  if (isTRUE(x$no_source)) {
+    cat("Source code not available for this file.\n")
+    return(invisible(x))
+  }
+
+  if (x$multiple_match) {
+    cat("Multiple files match. Using:", x$filename, "\n")
+  }
+
+  if (x$auto_linenum) {
+    cat(sprintf("Showing context around hottest line: %d\n\n", x$linenum))
+  }
+
+  filename <- x$filename
+  linenum <- x$linenum
+  start_line <- x$start_line
+  actual_end <- x$actual_end
+  source_lines <- x$source_lines
+  line_data <- x$line_data
+  file_prof <- x$file_prof
 
   cat_header(sprintf("SOURCE: %s", filename))
   cat("\n")
@@ -131,7 +195,7 @@ pv_source_context <- function(x, filename, linenum = NULL, context = 10) {
     }
   }
 
-  invisible(line_data)
+  invisible(x)
 }
 
 aggregate_lines <- function(file_prof, interval_ms, total_samples) {

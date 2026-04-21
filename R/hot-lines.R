@@ -69,7 +69,8 @@ pv_hot_lines <- function(x, n = NULL, min_pct = 0, min_time_ms = 0) {
 #' @param n Number of hot lines to show.
 #' @param context Number of lines to show before and after each hotspot.
 #'
-#' @return Invisibly returns the hot lines data frame.
+#' @return Invisibly returns a `debrief_hot_lines` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example()
@@ -81,15 +82,33 @@ pv_print_hot_lines <- function(x, n = 5, context = 3) {
 
   hot_lines <- pv_hot_lines(x, n = n)
 
+  files <- extract_files(x)
+  file_contents <- build_file_contents(files)
+
+  obj <- structure(
+    list(
+      hot_lines = hot_lines,
+      file_contents = file_contents,
+      context = context
+    ),
+    class = "debrief_hot_lines"
+  )
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_hot_lines <- function(x, ...) {
+  hot_lines <- x$hot_lines
+  file_contents <- x$file_contents
+  context <- x$context
+
   if (nrow(hot_lines) == 0) {
     cat("No source location data available.\n")
     cat("Use devtools::load_all() to enable source references.\n")
     cat_help_hint()
-    return(invisible(hot_lines))
+    return(invisible(x))
   }
-
-  files <- extract_files(x)
-  file_contents <- build_file_contents(files)
 
   cat_header("HOT SOURCE LINES")
   cat("\n")
@@ -138,7 +157,7 @@ pv_print_hot_lines <- function(x, n = 5, context = 3) {
     cat_next_steps(suggestions)
   }
 
-  invisible(hot_lines)
+  invisible(x)
 }
 
 #' Get the single hottest line

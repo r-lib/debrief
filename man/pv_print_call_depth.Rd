@@ -10,7 +10,8 @@ pv_print_call_depth(x)
 \item{x}{A profvis object.}
 }
 \value{
-Invisibly returns the call depth data frame.
+Invisibly returns a \code{debrief_call_depth} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Print call depth breakdown

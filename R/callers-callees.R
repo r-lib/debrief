@@ -121,7 +121,8 @@ find_adjacent_functions <- function(
 #' @param func The function name to analyze.
 #' @param n Maximum number of callers/callees to show.
 #'
-#' @return Invisibly returns a list with `callers` and `callees` data frames.
+#' @return Invisibly returns a `debrief_callers_callees` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example()
@@ -140,6 +141,32 @@ pv_print_callers_callees <- function(x, func, n = 10) {
   func_times <- unique(pd$prof$time[pd$prof$label == func])
   func_total_time <- length(func_times) * pd$interval_ms
   func_pct <- round(100 * length(func_times) / pd$total_samples, 1)
+
+  obj <- structure(
+    list(
+      callers = callers,
+      callees = callees,
+      func = func,
+      func_times = func_times,
+      func_total_time = func_total_time,
+      func_pct = func_pct,
+      n = n
+    ),
+    class = "debrief_callers_callees"
+  )
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_callers_callees <- function(x, ...) {
+  callers <- x$callers
+  callees <- x$callees
+  func <- x$func
+  func_times <- x$func_times
+  func_total_time <- x$func_total_time
+  func_pct <- x$func_pct
+  n <- x$n
 
   cat_header(sprintf("FUNCTION ANALYSIS: %s", func))
   cat("\n")
@@ -194,5 +221,5 @@ pv_print_callers_callees <- function(x, func, n = 10) {
   }
   cat_next_steps(suggestions)
 
-  invisible(list(callers = callers, callees = callees))
+  invisible(x)
 }

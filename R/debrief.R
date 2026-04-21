@@ -64,7 +64,8 @@ pv_debrief <- function(x, n = 10) {
 #' @param n_paths Number of hot paths to show (default 5).
 #' @param n_memory Number of memory hotspots to show (default 5).
 #'
-#' @return Invisibly returns the result of [pv_debrief()].
+#' @return Invisibly returns a `debrief_debrief` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example()
@@ -94,6 +95,52 @@ pv_print_debrief <- function(
   hot_paths <- pv_hot_paths(x)
   memory_funcs <- pv_memory(x)
   memory_lines <- if (has_source) pv_memory_lines(x) else NULL
+
+  obj <- structure(
+    list(
+      interval_ms = interval_ms,
+      total_samples = total_samples,
+      total_time_ms = total_time_ms,
+      has_source = has_source,
+      file_contents = file_contents,
+      self_time = self_time,
+      total_time = total_time,
+      hot_lines = hot_lines,
+      hot_paths = hot_paths,
+      memory_funcs = memory_funcs,
+      memory_lines = memory_lines,
+      n_functions = n_functions,
+      n_lines = n_lines,
+      n_paths = n_paths,
+      n_memory = n_memory,
+      debrief = pv_debrief(
+        x,
+        n = max(n_functions, n_lines, n_paths, n_memory)
+      )
+    ),
+    class = "debrief_debrief"
+  )
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_debrief <- function(x, ...) {
+  interval_ms <- x$interval_ms
+  total_samples <- x$total_samples
+  total_time_ms <- x$total_time_ms
+  has_source <- x$has_source
+  file_contents <- x$file_contents
+  self_time <- x$self_time
+  total_time <- x$total_time
+  hot_lines <- x$hot_lines
+  hot_paths <- x$hot_paths
+  memory_funcs <- x$memory_funcs
+  memory_lines <- x$memory_lines
+  n_functions <- x$n_functions
+  n_lines <- x$n_lines
+  n_paths <- x$n_paths
+  n_memory <- x$n_memory
 
   # Print output
   cat_header("PROFILING SUMMARY")
@@ -152,7 +199,7 @@ pv_print_debrief <- function(
   suggestions <- c(suggestions, "pv_suggestions(p)", "pv_help()")
   cat_next_steps(suggestions)
 
-  invisible(pv_debrief(x, n = max(n_functions, n_lines, n_paths, n_memory)))
+  invisible(x)
 }
 
 # Print helpers for debrief

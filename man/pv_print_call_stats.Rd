@@ -12,7 +12,8 @@ pv_print_call_stats(x, n = 20)
 \item{n}{Number of functions to show.}
 }
 \value{
-Invisibly returns the call stats data frame.
+Invisibly returns a \code{debrief_call_stats} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Print call statistics

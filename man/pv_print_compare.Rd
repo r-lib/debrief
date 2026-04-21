@@ -14,7 +14,8 @@ pv_print_compare(before, after, n = 15)
 \item{n}{Number of functions to show in detailed comparison.}
 }
 \value{
-Invisibly returns the comparison list.
+Invisibly returns a \code{debrief_compare} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Print profile comparison

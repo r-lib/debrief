@@ -16,7 +16,8 @@ pv_flame(x, width = 70, min_pct = 2, max_depth = 15)
 \item{max_depth}{Maximum depth to display.}
 }
 \value{
-Invisibly returns the flame data structure.
+Invisibly returns a \code{debrief_flame} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Generates an ASCII representation of a flame graph showing the hierarchical

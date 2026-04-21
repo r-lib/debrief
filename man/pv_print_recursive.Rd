@@ -10,7 +10,8 @@ pv_print_recursive(x)
 \item{x}{A profvis object.}
 }
 \value{
-Invisibly returns the recursive functions data frame.
+Invisibly returns a \code{debrief_recursive} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Print recursive functions analysis

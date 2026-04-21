@@ -14,7 +14,8 @@ pv_print_hot_lines(x, n = 5, context = 3)
 \item{context}{Number of lines to show before and after each hotspot.}
 }
 \value{
-Invisibly returns the hot lines data frame.
+Invisibly returns a \code{debrief_hot_lines} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Prints the hot source lines along with surrounding code context.

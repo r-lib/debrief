@@ -14,7 +14,8 @@ pv_print_hot_paths(x, n = 10, include_source = TRUE)
 \item{include_source}{Include source references in output.}
 }
 \value{
-Invisibly returns the hot paths data frame.
+Invisibly returns a \code{debrief_hot_paths} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Print hot paths in readable format

@@ -331,7 +331,8 @@ suggest_top_function_optimization <- function(
 #'
 #' @param x A profvis object.
 #'
-#' @return Invisibly returns the suggestions data frame.
+#' @return Invisibly returns a `debrief_suggestions` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example("gc")
@@ -343,6 +344,17 @@ pv_print_suggestions <- function(x) {
   check_empty_profile(x)
 
   suggestions <- pv_suggestions(x)
+  obj <- structure(
+    list(suggestions = suggestions),
+    class = "debrief_suggestions"
+  )
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_suggestions <- function(x, ...) {
+  suggestions <- x$suggestions
 
   cat_header("OPTIMIZATION SUGGESTIONS")
   cat("\n")
@@ -350,7 +362,7 @@ pv_print_suggestions <- function(x) {
   if (nrow(suggestions) == 0) {
     cat("No suggestions.\n")
     cat_help_hint()
-    return(invisible(suggestions))
+    return(invisible(x))
   }
 
   current_priority <- 0
@@ -390,5 +402,5 @@ pv_print_suggestions <- function(x) {
     }
   }
 
-  invisible(suggestions)
+  invisible(x)
 }

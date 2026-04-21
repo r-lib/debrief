@@ -14,7 +14,8 @@ pv_print_callers_callees(x, func, n = 10)
 \item{n}{Maximum number of callers/callees to show.}
 }
 \value{
-Invisibly returns a list with \code{callers} and \code{callees} data frames.
+Invisibly returns a \code{debrief_callers_callees} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Shows both callers (who calls this function) and callees (what this function

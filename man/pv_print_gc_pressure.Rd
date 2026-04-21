@@ -12,7 +12,8 @@ pv_print_gc_pressure(x, threshold = 10)
 \item{threshold}{Minimum GC percentage to report (default 10).}
 }
 \value{
-Invisibly returns the GC pressure data frame.
+Invisibly returns a \code{debrief_gc_pressure} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Print GC pressure analysis

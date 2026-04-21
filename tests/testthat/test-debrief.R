@@ -70,10 +70,9 @@ test_that("pv_print_debrief returns pv_debrief invisibly", {
   p <- mock_profvis()
 
   result <- expect_invisible(pv_print_debrief(p))
-  expect_type(result, "list")
+  expect_s3_class(result, "debrief_debrief")
   expect_true("total_time_ms" %in% names(result))
   expect_true("self_time" %in% names(result))
-  expect_true("suggestions" %in% names(result))
 })
 
 test_that("pv_print_debrief rejects non-profvis input", {

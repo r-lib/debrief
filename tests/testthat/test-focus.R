@@ -12,27 +12,14 @@ test_that("pv_focus returns invisibly", {
   p <- mock_profvis()
 
   result <- expect_invisible(pv_focus(p, "inner"))
-  expect_type(result, "list")
-  expect_named(
-    result,
-    c(
-      "func",
-      "total_time_ms",
-      "total_pct",
-      "self_time_ms",
-      "self_pct",
-      "appearances",
-      "callers",
-      "callees"
-    )
-  )
+  expect_s3_class(result, "debrief_focus")
 })
 
 test_that("pv_focus returns NULL for non-existent function", {
   p <- mock_profvis()
 
   result <- expect_invisible(pv_focus(p, "nonexistent"))
-  expect_null(result)
+  expect_s3_class(result, "debrief_focus")
 })
 
 test_that("pv_focus handles no source refs", {

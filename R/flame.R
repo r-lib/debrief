@@ -8,7 +8,8 @@
 #' @param min_pct Minimum percentage to show (filters small slices).
 #' @param max_depth Maximum depth to display.
 #'
-#' @return Invisibly returns the flame data structure.
+#' @return Invisibly returns a `debrief_flame` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example()
@@ -17,27 +18,42 @@
 pv_flame <- function(x, width = 70, min_pct = 2, max_depth = 15) {
   pd <- extract_profile_data(x)
   total_time <- pd$total_samples * pd$interval_ms
+  tree <- build_flame_tree_v2(pd$prof, pd$total_samples)
 
+  obj <- structure(
+    list(
+      tree = tree,
+      total_time = total_time,
+      width = width,
+      min_pct = min_pct,
+      max_depth = max_depth,
+      total_samples = pd$total_samples
+    ),
+    class = "debrief_flame"
+  )
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_flame <- function(x, ...) {
   cat_header("FLAME GRAPH (text)")
   cat("\n")
   cat(sprintf(
     "Total time: %.0f ms | Width: %d chars | Min: %.0f%%\n\n",
-    total_time,
-    width,
-    min_pct
+    x$total_time,
+    x$width,
+    x$min_pct
   ))
 
-  # Build and print flame tree using path-based approach
-  tree <- build_flame_tree_v2(pd$prof, pd$total_samples)
-
-  # Print the tree
-  print_flame_tree(tree, width, min_pct, pd$total_samples, max_depth)
+  print_flame_tree(x$tree, x$width, x$min_pct, x$total_samples, x$max_depth)
 
   cat("\nLegend: [====] = time spent, width proportional to time\n")
 
   # Next steps - find the top function from level 1
+  tree <- x$tree
   if (length(tree) >= 1 && length(tree[[1]]) > 0) {
-    items <- tree[[1]][order(-sapply(tree[[1]], function(x) x$samples))]
+    items <- tree[[1]][order(-sapply(tree[[1]], function(item) item$samples))]
     top_func <- items[[1]]$name
     suggestions <- "pv_hot_paths(p)"
     if (is_user_function(top_func)) {
@@ -46,7 +62,7 @@ pv_flame <- function(x, width = 70, min_pct = 2, max_depth = 15) {
     cat_next_steps(suggestions)
   }
 
-  invisible(tree)
+  invisible(x)
 }
 
 build_flame_tree_v2 <- function(prof, total_samples) {
@@ -135,7 +151,8 @@ print_flame_tree <- function(tree, width, min_pct, total_samples, max_depth) {
 #' @param n Number of hot paths to show.
 #' @param width Width of bars.
 #'
-#' @return Invisibly returns a data frame with path, samples, and pct columns.
+#' @return Invisibly returns a `debrief_flame_condense` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example()
@@ -143,9 +160,6 @@ print_flame_tree <- function(tree, width, min_pct, total_samples, max_depth) {
 #' @export
 pv_flame_condense <- function(x, n = 10, width = 50) {
   pd <- extract_profile_data(x)
-
-  cat_header("CONDENSED FLAME VIEW")
-  cat("\n")
 
   # Get unique paths and their frequencies
   times <- unique(pd$prof$time)
@@ -170,10 +184,33 @@ pv_flame_condense <- function(x, n = 10, width = 50) {
   paths_df <- paths_df[order(-paths_df$samples), ]
   paths_df$pct <- round(100 * paths_df$samples / pd$total_samples, 1)
 
+  obj <- structure(
+    list(
+      paths_df = paths_df,
+      n = n,
+      width = width,
+      total_samples = pd$total_samples
+    ),
+    class = "debrief_flame_condense"
+  )
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_flame_condense <- function(x, ...) {
+  paths_df <- x$paths_df
+  n <- x$n
+  width <- x$width
+  total_samples <- x$total_samples
+
+  cat_header("CONDENSED FLAME VIEW")
+  cat("\n")
+
   # Show top n paths
   for (i in seq_len(min(n, nrow(paths_df)))) {
     row <- paths_df[i, ]
-    bar_width <- max(1, round(width * row$samples / pd$total_samples))
+    bar_width <- max(1, round(width * row$samples / total_samples))
     bar <- strrep("#", bar_width)
 
     cat(sprintf("\n%s %.1f%% (%d samples)\n", bar, row$pct, row$samples))
@@ -197,5 +234,5 @@ pv_flame_condense <- function(x, n = 10, width = 50) {
     cat_next_steps(suggestions)
   }
 
-  invisible(paths_df)
+  invisible(x)
 }

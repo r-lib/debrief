@@ -7,7 +7,8 @@
 #'   categories. Options: "overview", "time", "hotspots", "memory", "calls",
 #'   "source", "visualization", "comparison", "diagnostics", "export".
 #'
-#' @return Invisibly returns a list of functions by category.
+#' @return Invisibly returns a `debrief_help` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' pv_help()
@@ -111,21 +112,50 @@ pv_help <- function(category = NULL) {
   if (!is.null(category)) {
     category <- tolower(category)
     if (!category %in% valid_categories) {
-      cat("Unknown category:", category, "\n")
-      cat("Valid categories:", paste(valid_categories, collapse = ", "), "\n")
-      return(invisible(categories))
+      obj <- structure(
+        list(
+          categories = categories,
+          filtered = NULL,
+          invalid_category = category,
+          valid_categories = valid_categories
+        ),
+        class = "debrief_help"
+      )
+      print(obj)
+      return(invisible(obj))
     }
     categories <- categories[category]
   }
 
-  cat("## DEBRIEF FUNCTIONS\n\n")
+  obj <- structure(
+    list(
+      categories = categories,
+      filtered = category,
+      invalid_category = NULL,
+      valid_categories = valid_categories
+    ),
+    class = "debrief_help"
+  )
+  print(obj)
+  invisible(obj)
+}
 
-  if (is.null(category)) {
-    cat("Use pv_help(\"category\") to see functions in a specific category.\n")
-    cat("Categories:", paste(valid_categories, collapse = ", "), "\n\n")
+#' @exportS3Method
+print.debrief_help <- function(x, ...) {
+  if (!is.null(x$invalid_category)) {
+    cat("Unknown category:", x$invalid_category, "\n")
+    cat("Valid categories:", paste(x$valid_categories, collapse = ", "), "\n")
+    return(invisible(x))
   }
 
-  for (cat_info in categories) {
+  cat("## DEBRIEF FUNCTIONS\n\n")
+
+  if (is.null(x$filtered)) {
+    cat("Use pv_help(\"category\") to see functions in a specific category.\n")
+    cat("Categories:", paste(x$valid_categories, collapse = ", "), "\n\n")
+  }
+
+  for (cat_info in x$categories) {
     cat("###", cat_info$title, "\n")
     funcs <- cat_info$functions
     for (i in seq_along(funcs)) {
@@ -156,5 +186,5 @@ pv_help <- function(category = NULL) {
         -> Get optimization recommendations\n"
   )
 
-  invisible(categories)
+  invisible(x)
 }
