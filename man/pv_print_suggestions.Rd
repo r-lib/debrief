@@ -10,7 +10,8 @@ pv_print_suggestions(x)
 \item{x}{A profvis object.}
 }
 \value{
-Invisibly returns the suggestions data frame.
+Invisibly returns a \code{debrief_suggestions} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Print optimization suggestions

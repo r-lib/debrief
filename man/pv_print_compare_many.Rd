@@ -10,7 +10,8 @@ pv_print_compare_many(...)
 \item{...}{Named profvis objects to compare, or a single named list.}
 }
 \value{
-Invisibly returns the comparison data frame.
+Invisibly returns a \code{debrief_compare_many} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Print comparison of multiple profiles

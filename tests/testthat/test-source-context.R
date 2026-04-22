@@ -41,7 +41,7 @@ test_that("pv_source_context returns line data invisibly", {
   p <- mock_profvis()
 
   result <- expect_invisible(pv_source_context(p, "R/main.R"))
-  expect_s3_class(result, "data.frame")
+  expect_s3_class(result, "debrief_source_context")
 })
 
 test_that("pv_file_summary returns correct structure", {

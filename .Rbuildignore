@@ -11,3 +11,4 @@
 ^codecov\.yml$
 ^data-raw$
 ^DESIGN\.md$
+^CRAN-SUBMISSION$

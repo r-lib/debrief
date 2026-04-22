@@ -77,7 +77,8 @@ pv_hot_paths <- function(x, n = NULL, include_source = TRUE) {
 #' @param n Number of paths to show.
 #' @param include_source Include source references in output.
 #'
-#' @return Invisibly returns the hot paths data frame.
+#' @return Invisibly returns a `debrief_hot_paths` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example()
@@ -89,11 +90,19 @@ pv_print_hot_paths <- function(x, n = 10, include_source = TRUE) {
   check_empty_profile(x)
 
   paths <- pv_hot_paths(x, n = n, include_source = include_source)
+  obj <- structure(list(paths = paths), class = "debrief_hot_paths")
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_hot_paths <- function(x, ...) {
+  paths <- x$paths
 
   if (nrow(paths) == 0) {
     cat("No profiling data available.\n")
     cat_help_hint()
-    return(invisible(paths))
+    return(invisible(x))
   }
 
   cat_header("HOT CALL PATHS")
@@ -126,5 +135,5 @@ pv_print_hot_paths <- function(x, n = 10, include_source = TRUE) {
     cat_next_steps(suggestions)
   }
 
-  invisible(paths)
+  invisible(x)
 }

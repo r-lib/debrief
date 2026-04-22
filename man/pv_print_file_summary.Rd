@@ -10,7 +10,8 @@ pv_print_file_summary(x)
 \item{x}{A profvis object.}
 }
 \value{
-Invisibly returns the file summary data frame.
+Invisibly returns a \code{debrief_file_summary} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Print file summary

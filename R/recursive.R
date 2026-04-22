@@ -96,7 +96,8 @@ pv_recursive <- function(x) {
 #'
 #' @param x A profvis object.
 #'
-#' @return Invisibly returns the recursive functions data frame.
+#' @return Invisibly returns a `debrief_recursive` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example("recursive")
@@ -108,11 +109,19 @@ pv_print_recursive <- function(x) {
   check_empty_profile(x)
 
   recursive <- pv_recursive(x)
+  obj <- structure(list(recursive = recursive), class = "debrief_recursive")
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_recursive <- function(x, ...) {
+  recursive <- x$recursive
 
   if (nrow(recursive) == 0) {
     cat("No recursive functions detected in the profile.\n")
     cat_help_hint()
-    return(invisible(recursive))
+    return(invisible(x))
   }
 
   cat_header("RECURSIVE FUNCTIONS")
@@ -149,5 +158,5 @@ pv_print_recursive <- function(x) {
     cat_next_steps(suggestions)
   }
 
-  invisible(recursive)
+  invisible(x)
 }

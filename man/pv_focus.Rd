@@ -14,7 +14,8 @@ pv_focus(x, func, context = 5)
 \item{context}{Number of source lines to show around hotspots.}
 }
 \value{
-Invisibly returns a list with all analysis components.
+Invisibly returns a \code{debrief_focus} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Provides a comprehensive analysis of a single function including time

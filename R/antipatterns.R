@@ -88,7 +88,8 @@ empty_gc_pressure_df <- function() {
 #' @param x A profvis object.
 #' @param threshold Minimum GC percentage to report (default 10).
 #'
-#' @return Invisibly returns the GC pressure data frame.
+#' @return Invisibly returns a `debrief_gc_pressure` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example("gc")
@@ -100,6 +101,18 @@ pv_print_gc_pressure <- function(x, threshold = 10) {
   check_empty_profile(x)
 
   gc_data <- pv_gc_pressure(x, threshold = threshold)
+  obj <- structure(
+    list(gc_data = gc_data, threshold = threshold),
+    class = "debrief_gc_pressure"
+  )
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_gc_pressure <- function(x, ...) {
+  gc_data <- x$gc_data
+  threshold <- x$threshold
 
   cat_header("GC PRESSURE")
   cat("\n")
@@ -110,7 +123,7 @@ pv_print_gc_pressure <- function(x, threshold = 10) {
       threshold
     ))
     cat_help_hint()
-    return(invisible(gc_data))
+    return(invisible(x))
   }
 
   row <- gc_data[1, ]
@@ -128,5 +141,5 @@ pv_print_gc_pressure <- function(x, threshold = 10) {
     "pv_suggestions(p)"
   ))
 
-  invisible(gc_data)
+  invisible(x)
 }

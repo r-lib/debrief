@@ -48,7 +48,8 @@ pv_file_summary <- function(x) {
 #'
 #' @param x A profvis object.
 #'
-#' @return Invisibly returns the file summary data frame.
+#' @return Invisibly returns a `debrief_file_summary` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example()
@@ -60,12 +61,23 @@ pv_print_file_summary <- function(x) {
   check_empty_profile(x)
 
   summary_df <- pv_file_summary(x)
+  obj <- structure(
+    list(summary_df = summary_df),
+    class = "debrief_file_summary"
+  )
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_file_summary <- function(x, ...) {
+  summary_df <- x$summary_df
 
   if (nrow(summary_df) == 0) {
     cat("No source location data available.\n")
     cat("Use devtools::load_all() to enable source references.\n")
     cat_help_hint()
-    return(invisible(summary_df))
+    return(invisible(x))
   }
 
   cat_header("FILE SUMMARY")
@@ -90,5 +102,5 @@ pv_print_file_summary <- function(x) {
     ))
   }
 
-  invisible(summary_df)
+  invisible(x)
 }

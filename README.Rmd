@@ -17,16 +17,21 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN status](https://www.r-pkg.org/badges/version/debrief)](https://CRAN.R-project.org/package=debrief)
 [![R-CMD-check](https://github.com/r-lib/debrief/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/debrief/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/r-lib/debrief/graph/badge.svg)](https://app.codecov.io/gh/r-lib/debrief)
 <!-- badges: end -->
 
-debrief provides text-based summaries and analysis tools for [profvis](https://rstudio.github.io/profvis/) profiling output. It's designed for terminal workflows and AI agent consumption, offering views including hotspot analysis, call trees, source context, caller/callee relationships, and memory allocation breakdowns.
+debrief provides text-based summaries and analysis tools for [profvis](https://profvis.r-lib.org/) profiling output. It's designed for terminal workflows and AI agent consumption, offering views including hotspot analysis, call trees, source context, caller/callee relationships, and memory allocation breakdowns.
 
 ## Installation
 
-You can install the development version of debrief from [GitHub](https://github.com/) with:
+You can install the released version of debrief from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("debrief")
+```
+
+Install the development version from GitHub with:
 
 ``` r
 # install.packages("pak")

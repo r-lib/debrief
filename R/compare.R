@@ -106,7 +106,8 @@ pv_compare <- function(before, after, n = 20) {
 #' @param after A profvis object (after optimization).
 #' @param n Number of functions to show in detailed comparison.
 #'
-#' @return Invisibly returns the comparison list.
+#' @return Invisibly returns a `debrief_compare` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p1 <- pv_example()
@@ -119,6 +120,15 @@ pv_print_compare <- function(before, after, n = 15) {
   check_profvis(after)
 
   comp <- pv_compare(before, after, n = n)
+  obj <- structure(list(comp = comp, n = n), class = "debrief_compare")
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_compare <- function(x, ...) {
+  comp <- x$comp
+  n <- x$n
 
   cat_header("PROFILE COMPARISON")
   cat("\n")
@@ -215,7 +225,7 @@ pv_print_compare <- function(before, after, n = 15) {
     cat_next_steps(suggestions)
   }
 
-  invisible(comp)
+  invisible(x)
 }
 
 #' Compare multiple profvis profiles
@@ -306,7 +316,8 @@ pv_compare_many <- function(...) {
 #'
 #' @param ... Named profvis objects to compare, or a single named list.
 #'
-#' @return Invisibly returns the comparison data frame.
+#' @return Invisibly returns a `debrief_compare_many` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p1 <- pv_example()
@@ -315,6 +326,14 @@ pv_compare_many <- function(...) {
 #' @export
 pv_print_compare_many <- function(...) {
   result <- pv_compare_many(...)
+  obj <- structure(list(result = result), class = "debrief_compare_many")
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_compare_many <- function(x, ...) {
+  result <- x$result
 
   cat_header("MULTI-PROFILE COMPARISON")
   cat("\n")
@@ -344,5 +363,5 @@ pv_print_compare_many <- function(...) {
 
   cat("\n* = fastest\n")
 
-  invisible(result)
+  invisible(x)
 }

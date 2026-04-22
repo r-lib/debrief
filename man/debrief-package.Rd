@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Provides text-based summaries and analysis tools for 'profvis' profiling output. Designed for terminal workflows and AI agent consumption, offering views including hotspot analysis, call trees, source context, caller/callee relationships, and memory allocation breakdowns.
+Provides text-based summaries and analysis tools for 'profvis' profiling output. Designed for terminal workflows and artificial intelligence (AI) agent consumption, offering views including hotspot analysis, call trees, source context, caller/callee relationships, and memory allocation breakdowns.
 }
 \seealso{
 Useful links:

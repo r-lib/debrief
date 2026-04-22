@@ -1,18 +1,21 @@
 Package: debrief
 Title: Text-Based Summaries for 'profvis' Profiling Data
-Version: 0.0.0.9000
+Version: 0.1.0.9000
 Authors@R: c(
     person("Emil", "Hvitfeldt", , "emil.hvitfeldt@posit.co", role = c("aut", "cre")),
     person("Posit Software, PBC", role = c("cph", "fnd"), comment = c(ROR = "03wc8by49"))
   )
 Description: Provides text-based summaries and analysis tools for
-    'profvis' profiling output. Designed for terminal workflows and AI
-    agent consumption, offering views including hotspot analysis, call
+    'profvis' profiling output. Designed for terminal workflows and
+    artificial intelligence (AI) agent consumption, offering views
+    including hotspot analysis, call
     trees, source context, caller/callee relationships, and memory
     allocation breakdowns.
 License: MIT + file LICENSE
 URL: https://github.com/r-lib/debrief, https://r-lib.github.io/debrief/
 BugReports: https://github.com/r-lib/debrief/issues
+Depends:
+    R (>= 4.1)
 Suggests:
     knitr,
     profvis,

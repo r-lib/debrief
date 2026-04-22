@@ -12,7 +12,8 @@ categories. Options: "overview", "time", "hotspots", "memory", "calls",
 "source", "visualization", "comparison", "diagnostics", "export".}
 }
 \value{
-Invisibly returns a list of functions by category.
+Invisibly returns a \code{debrief_help} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Prints a summary of all available functions in the debrief package,

@@ -14,7 +14,8 @@ pv_print_memory(x, n = 10, by = c("function", "line"))
 \item{by}{Either "function" or "line".}
 }
 \value{
-Invisibly returns the memory data frame.
+Invisibly returns a \code{debrief_memory} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Print memory allocation summary

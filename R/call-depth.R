@@ -47,7 +47,8 @@ pv_call_depth <- function(x) {
 #'
 #' @param x A profvis object.
 #'
-#' @return Invisibly returns the call depth data frame.
+#' @return Invisibly returns a `debrief_call_depth` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example()
@@ -59,11 +60,19 @@ pv_print_call_depth <- function(x) {
   check_empty_profile(x)
 
   depth_df <- pv_call_depth(x)
+  obj <- structure(list(depth_df = depth_df), class = "debrief_call_depth")
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_call_depth <- function(x, ...) {
+  depth_df <- x$depth_df
 
   if (nrow(depth_df) == 0) {
     cat("No profiling data available.\n")
     cat_help_hint()
-    return(invisible(depth_df))
+    return(invisible(x))
   }
 
   cat_header("CALL DEPTH BREAKDOWN")
@@ -99,5 +108,5 @@ pv_print_call_depth <- function(x) {
     }
   }
 
-  invisible(depth_df)
+  invisible(x)
 }

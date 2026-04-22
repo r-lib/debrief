@@ -18,7 +18,8 @@ pv_print_debrief(x, n_functions = 10, n_lines = 10, n_paths = 5, n_memory = 5)
 \item{n_memory}{Number of memory hotspots to show (default 5).}
 }
 \value{
-Invisibly returns the result of \code{\link[=pv_debrief]{pv_debrief()}}.
+Invisibly returns a \code{debrief_debrief} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Prints a comprehensive text summary of profiling data suitable for

@@ -14,9 +14,14 @@ pv_flame_condense(x, n = 10, width = 50)
 \item{width}{Width of bars.}
 }
 \value{
-Invisibly returns a data frame with path, samples, and pct columns.
+Invisibly returns a \code{debrief_flame_condense} object. Use
+\code{capture.output()} to capture the formatted text output.
 }
 \description{
 Shows a simplified, condensed view of the flame graph focusing on the
 hottest paths.
+}
+\examples{
+p <- pv_example()
+pv_flame_condense(p)
 }

@@ -7,7 +7,8 @@
 #' @param func The function name to analyze.
 #' @param context Number of source lines to show around hotspots.
 #'
-#' @return Invisibly returns a list with all analysis components.
+#' @return Invisibly returns a `debrief_focus` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example()
@@ -21,15 +22,17 @@ pv_focus <- function(x, func, context = 5) {
   # Check if function exists
   func_rows <- pd$prof[pd$prof$label == func, ]
   if (nrow(func_rows) == 0) {
-    cat(sprintf("Function '%s' not found in profiling data.\n\n", func))
-    cat("Available functions (top 20 by time):\n")
     total_time <- pv_total_time(x)
-    for (i in seq_len(min(20, nrow(total_time)))) {
-      cat(sprintf("  %s\n", total_time$label[i]))
-    }
-    cat("\n")
-    cat_help_hint()
-    return(invisible(NULL))
+    obj <- structure(
+      list(
+        func = func,
+        not_found = TRUE,
+        total_time = total_time
+      ),
+      class = "debrief_focus"
+    )
+    print(obj)
+    return(invisible(obj))
   }
 
   # Calculate time stats
@@ -50,6 +53,67 @@ pv_focus <- function(x, func, context = 5) {
   # Get source locations for this function
   func_with_source <- func_rows[!is.na(func_rows$filename), ]
   has_source <- nrow(func_with_source) > 0
+
+  # Filter to self-time only (needed for source locations and next steps)
+  func_top_of_stack <- top_of_stack[
+    top_of_stack$label == func & !is.na(top_of_stack$filename),
+  ]
+
+  obj <- structure(
+    list(
+      func = func,
+      not_found = FALSE,
+      func_times = func_times,
+      func_total_time = func_total_time,
+      func_total_pct = func_total_pct,
+      self_time = self_time,
+      self_pct = self_pct,
+      callers = callers,
+      callees = callees,
+      has_source = has_source,
+      func_with_source = func_with_source,
+      func_top_of_stack = func_top_of_stack,
+      file_contents = file_contents,
+      context = context,
+      interval_ms = pd$interval_ms,
+      total_samples = pd$total_samples
+    ),
+    class = "debrief_focus"
+  )
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_focus <- function(x, ...) {
+  func <- x$func
+
+  if (x$not_found) {
+    cat(sprintf("Function '%s' not found in profiling data.\n\n", func))
+    cat("Available functions (top 20 by time):\n")
+    total_time <- x$total_time
+    for (i in seq_len(min(20, nrow(total_time)))) {
+      cat(sprintf("  %s\n", total_time$label[i]))
+    }
+    cat("\n")
+    cat_help_hint()
+    return(invisible(x))
+  }
+
+  func_times <- x$func_times
+  func_total_time <- x$func_total_time
+  func_total_pct <- x$func_total_pct
+  self_time <- x$self_time
+  self_pct <- x$self_pct
+  callers <- x$callers
+  callees <- x$callees
+  has_source <- x$has_source
+  func_with_source <- x$func_with_source
+  func_top_of_stack <- x$func_top_of_stack
+  file_contents <- x$file_contents
+  context <- x$context
+  interval_ms <- x$interval_ms
+  total_samples <- x$total_samples
 
   # Print output
   cat_header(sprintf("FOCUS: %s", func))
@@ -109,11 +173,6 @@ pv_focus <- function(x, func, context = 5) {
   }
   cat("\n")
 
-  # Filter to self-time only (needed for source locations and next steps)
-  func_top_of_stack <- top_of_stack[
-    top_of_stack$label == func & !is.na(top_of_stack$filename),
-  ]
-
   # Show source locations if available
   if (has_source) {
     cat("### Source Locations\n")
@@ -137,8 +196,8 @@ pv_focus <- function(x, func, context = 5) {
       for (i in seq_len(min(5, length(line_counts)))) {
         loc <- names(line_counts)[i]
         samples <- as.integer(line_counts[i])
-        time_ms <- samples * pd$interval_ms
-        pct <- round(100 * samples / pd$total_samples, 1)
+        time_ms <- samples * interval_ms
+        pct <- round(100 * samples / total_samples, 1)
 
         cat(sprintf("  %5.0f ms (%4.1f%%)  %s\n", time_ms, pct, loc))
 
@@ -209,14 +268,5 @@ pv_focus <- function(x, func, context = 5) {
   }
   cat_next_steps(suggestions)
 
-  invisible(list(
-    func = func,
-    total_time_ms = func_total_time,
-    total_pct = func_total_pct,
-    self_time_ms = self_time,
-    self_pct = self_pct,
-    appearances = length(func_times),
-    callers = callers,
-    callees = callees
-  ))
+  invisible(x)
 }

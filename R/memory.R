@@ -103,7 +103,8 @@ pv_memory_lines <- function(x, n = NULL) {
 #' @param n Number of top allocators to show.
 #' @param by Either "function" or "line".
 #'
-#' @return Invisibly returns the memory data frame.
+#' @return Invisibly returns a `debrief_memory` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example()
@@ -118,11 +119,32 @@ pv_print_memory <- function(x, n = 10, by = c("function", "line")) {
 
   if (by == "function") {
     mem_df <- pv_memory(x, n = n)
+    file_contents <- NULL
+  } else {
+    mem_df <- pv_memory_lines(x, n = n)
+    files <- extract_files(x)
+    file_contents <- build_file_contents(files)
+  }
 
+  obj <- structure(
+    list(mem_df = mem_df, by = by, file_contents = file_contents),
+    class = "debrief_memory"
+  )
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_memory <- function(x, ...) {
+  mem_df <- x$mem_df
+  by <- x$by
+  file_contents <- x$file_contents
+
+  if (by == "function") {
     if (nrow(mem_df) == 0) {
       cat("No significant memory allocations detected.\n")
       cat_help_hint()
-      return(invisible(mem_df))
+      return(invisible(x))
     }
 
     cat_header("MEMORY ALLOCATION BY FUNCTION")
@@ -132,17 +154,12 @@ pv_print_memory <- function(x, n = 10, by = c("function", "line")) {
       cat(fmt_memory(mem_df$mem_mb[i]), " ", mem_df$label[i], "\n", sep = "")
     }
   } else {
-    mem_df <- pv_memory_lines(x, n = n)
-
     if (nrow(mem_df) == 0) {
       cat("No source location data available.\n")
       cat("Use devtools::load_all() to enable source references.\n")
       cat_help_hint()
-      return(invisible(mem_df))
+      return(invisible(x))
     }
-
-    files <- extract_files(x)
-    file_contents <- build_file_contents(files)
 
     cat_header("MEMORY ALLOCATION BY LINE")
     cat("\n")
@@ -175,5 +192,5 @@ pv_print_memory <- function(x, n = 10, by = c("function", "line")) {
     cat_next_steps(suggestions)
   }
 
-  invisible(mem_df)
+  invisible(x)
 }

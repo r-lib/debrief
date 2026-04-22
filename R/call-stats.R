@@ -120,7 +120,8 @@ estimate_call_count <- function(func, prof) {
 #' @param x A profvis object.
 #' @param n Number of functions to show.
 #'
-#' @return Invisibly returns the call stats data frame.
+#' @return Invisibly returns a `debrief_call_stats` object. Use
+#'   `capture.output()` to capture the formatted text output.
 #'
 #' @examples
 #' p <- pv_example()
@@ -132,11 +133,19 @@ pv_print_call_stats <- function(x, n = 20) {
   check_empty_profile(x)
 
   stats <- pv_call_stats(x, n = n)
+  obj <- structure(list(stats = stats), class = "debrief_call_stats")
+  print(obj)
+  invisible(obj)
+}
+
+#' @exportS3Method
+print.debrief_call_stats <- function(x, ...) {
+  stats <- x$stats
 
   if (nrow(stats) == 0) {
     cat("No profiling data available.\n")
     cat_help_hint()
-    return(invisible(stats))
+    return(invisible(x))
   }
 
   cat_header("CALL STATISTICS")
@@ -176,5 +185,5 @@ pv_print_call_stats <- function(x, n = 20) {
     }
   }
 
-  invisible(stats)
+  invisible(x)
 }

@@ -52,10 +52,10 @@ test_that("pv_flame_condense returns data frame", {
   p <- mock_profvis()
 
   result <- expect_invisible(pv_flame_condense(p))
-  expect_s3_class(result, "data.frame")
-  expect_true("path" %in% names(result))
-  expect_true("samples" %in% names(result))
-  expect_true("pct" %in% names(result))
+  expect_s3_class(result, "debrief_flame_condense")
+  expect_true("path" %in% names(result$paths_df))
+  expect_true("samples" %in% names(result$paths_df))
+  expect_true("pct" %in% names(result$paths_df))
 })
 
 test_that("flame functions reject non-profvis input", {
