@@ -60,7 +60,7 @@ cat(json)
 #>     "total_samples": 14,
 #>     "interval_ms": 5,
 #>     "has_source_refs": true,
-#>     "exported_at": "2026-04-22T00:25:26+0000"
+#>     "exported_at": "2026-04-22T00:33:58+0000"
 #>   },
 #>   "summary": {
 #>     "total_time_ms": 70,

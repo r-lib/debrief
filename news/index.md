@@ -1,7 +1,5 @@
 # Changelog
 
-## debrief 0.1.0
+## debrief (development version)
 
-CRAN release: 2026-04-21
-
-- Initial CRAN submission.
+- Added a `NEWS.md` file to track changes to the package.
