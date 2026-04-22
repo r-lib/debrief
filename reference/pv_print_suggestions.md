@@ -16,7 +16,9 @@ pv_print_suggestions(x)
 
 ## Value
 
-Invisibly returns the suggestions data frame.
+Invisibly returns a `debrief_suggestions` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

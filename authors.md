@@ -10,16 +10,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/r-lib/debrief/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/r-lib/debrief/blob/v0.1.0/DESCRIPTION)
 
 Hvitfeldt E (2026). *debrief: Text-Based Summaries for 'profvis'
-Profiling Data*. R package version 0.0.0.9000,
+Profiling Data*. R package version 0.1.0,
 <https://github.com/r-lib/debrief>.
 
     @Manual{,
       title = {debrief: Text-Based Summaries for 'profvis' Profiling Data},
       author = {Emil Hvitfeldt},
       year = {2026},
-      note = {R package version 0.0.0.9000},
+      note = {R package version 0.1.0},
       url = {https://github.com/r-lib/debrief},
     }

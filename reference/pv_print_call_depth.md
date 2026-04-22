@@ -16,7 +16,9 @@ pv_print_call_depth(x)
 
 ## Value
 
-Invisibly returns the call depth data frame.
+Invisibly returns a `debrief_call_depth` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

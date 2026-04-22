@@ -29,7 +29,9 @@ pv_flame(x, width = 70, min_pct = 2, max_depth = 15)
 
 ## Value
 
-Invisibly returns the flame data structure.
+Invisibly returns a `debrief_flame` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

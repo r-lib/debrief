@@ -16,7 +16,9 @@ pv_print_compare_many(...)
 
 ## Value
 
-Invisibly returns the comparison data frame.
+Invisibly returns a `debrief_compare_many` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

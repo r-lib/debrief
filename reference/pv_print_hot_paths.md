@@ -24,7 +24,9 @@ pv_print_hot_paths(x, n = 10, include_source = TRUE)
 
 ## Value
 
-Invisibly returns the hot paths data frame.
+Invisibly returns a `debrief_hot_paths` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

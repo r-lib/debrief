@@ -25,7 +25,9 @@ pv_focus(x, func, context = 5)
 
 ## Value
 
-Invisibly returns a list with all analysis components.
+Invisibly returns a `debrief_focus` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

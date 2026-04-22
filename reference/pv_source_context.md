@@ -30,7 +30,9 @@ pv_source_context(x, filename, linenum = NULL, context = 10)
 
 ## Value
 
-Invisibly returns a data frame with line-by-line profiling data.
+Invisibly returns a `debrief_source_context` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

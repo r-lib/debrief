@@ -16,7 +16,9 @@ pv_print_file_summary(x)
 
 ## Value
 
-Invisibly returns the file summary data frame.
+Invisibly returns a `debrief_file_summary` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

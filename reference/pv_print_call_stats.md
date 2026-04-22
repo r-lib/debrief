@@ -20,7 +20,9 @@ pv_print_call_stats(x, n = 20)
 
 ## Value
 
-Invisibly returns the call stats data frame.
+Invisibly returns a `debrief_call_stats` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

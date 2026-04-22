@@ -24,7 +24,9 @@ pv_print_memory(x, n = 10, by = c("function", "line"))
 
 ## Value
 
-Invisibly returns the memory data frame.
+Invisibly returns a `debrief_memory` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

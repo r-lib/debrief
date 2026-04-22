@@ -34,8 +34,9 @@ pv_print_debrief(x, n_functions = 10, n_lines = 10, n_paths = 5, n_memory = 5)
 
 ## Value
 
-Invisibly returns the result of
-[`pv_debrief()`](https://r-lib.github.io/debrief/reference/pv_debrief.md).
+Invisibly returns a `debrief_debrief` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

@@ -20,7 +20,9 @@ pv_print_gc_pressure(x, threshold = 10)
 
 ## Value
 
-Invisibly returns the GC pressure data frame.
+Invisibly returns a `debrief_gc_pressure` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

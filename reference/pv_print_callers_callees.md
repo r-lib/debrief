@@ -25,7 +25,9 @@ pv_print_callers_callees(x, func, n = 10)
 
 ## Value
 
-Invisibly returns a list with `callers` and `callees` data frames.
+Invisibly returns a `debrief_callers_callees` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

@@ -16,7 +16,9 @@ pv_print_recursive(x)
 
 ## Value
 
-Invisibly returns the recursive functions data frame.
+Invisibly returns a `debrief_recursive` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

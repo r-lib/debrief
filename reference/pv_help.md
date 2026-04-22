@@ -19,7 +19,9 @@ pv_help(category = NULL)
 
 ## Value
 
-Invisibly returns a list of functions by category.
+Invisibly returns a `debrief_help` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

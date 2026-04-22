@@ -24,7 +24,9 @@ pv_print_hot_lines(x, n = 5, context = 3)
 
 ## Value
 
-Invisibly returns the hot lines data frame.
+Invisibly returns a `debrief_hot_lines` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 

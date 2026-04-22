@@ -24,7 +24,9 @@ pv_print_compare(before, after, n = 15)
 
 ## Value
 
-Invisibly returns the comparison list.
+Invisibly returns a `debrief_compare` object. Use
+[`capture.output()`](https://rdrr.io/r/utils/capture.output.html) to
+capture the formatted text output.
 
 ## Examples
 
